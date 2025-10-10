@@ -1,203 +1,198 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<title>Список футбольных клубов мира</title>
+    <meta charset="UTF-8">
+    <title>Список футбольных клубов мира</title>
 </head>
-	<h1 align="center">Футбольные клубы мира</h1>
+<body>
+    <h1 align="center">Футбольные клубы мира</h1>
     <a href="The-strongest-football-clubs-in-the-world.html">Самые сильные футбольные клубы мира</a>
     <br>
     <a href="List-of-football-clubs-of-the-world.html">Список футбольных клубов мира</a>
-		<hr>
-		<details>
-  <summary> График </summary>
-	<br>
-			<table>
-				<tr>
-					<th>Значение по оси ОХ</th>
-					<th>Результат</th>
-				</tr>
-				<tr>
-					<td><form>
-		<input	type="radio"	name="type" value="c"> Страна <br>
-		<input	type="radio"	name="type" value="y"> Год основания
-</form></td>
+    <hr>
+    
+    <details>
+        <summary>График</summary>
+        <br>
+        <form>
+            Значение по оси ОХ:<br>
+            <input type="radio" name="type" id="c" value="c"> Страна <br>
+            <input type="radio" name="type" id="y" value="y"> Год основания
+            <br>
+            <br>
+            Результат:<br>
+            <input type="checkbox" id="val" value="0"> Максимальное количество титулов в Чемпионате <br>
+            <input type="checkbox" id="val1" value="1"> Минимальное количество титулов в Чемпионате <br>
+            <input type="checkbox" id="val2" value="2"> Максимальное количество сезонов в ЛЧ <br>
+            <input type="checkbox" id="val3" value="3"> Минимальное количество сезонов в ЛЧ
+        </form>
+        <input type="button" value="Построить">
+    </details>
+    <br>
 
-					<td>
-				<form>
-					<input type="checkbox" name="val" value="0"> Максимальное количество титулов в Чемпионате <br>
-					<input type="checkbox" name="val" value="1"> Минимальное количество титулов в Чемпионате <br>
-					<input type="checkbox" name="val" value="2"> Максимальное количество сезонов в ЛЧ <br>
-					<input type="checkbox" name="val" value="3"> Минимальное количество сезонов в ЛЧ
-				</form>
-					</td>
-				</tr>
+    <details>
+        <summary>Фильтр</summary>
+        <br>
+        <form>
+            <label>Название ФК:</label>
+            <input type="text" id="name">
+        </form>
+        <br>
+        <form>
+            <label>Страна:</label>
+            <input type="text" id="country">
+        </form>
+        <br>
+        <form>
+            <label>Основан:</label>
+            <input type="number" id="year">
+        </form>
+        <br>
+        <form>
+            <label>Воспитанников академии ФК в основе:</label>
+            <input type="number" id="academy">
+        </form>
+        <br>
+        <form>
+            <label>Сезонов в Лиге Чемпионов: от</label>
+            <input type="number" id="liga">
+            <label>до</label>
+            <input type="number" id="liga_max">
+        </form>
+        <br>
+        <form>
+            <label>Число титулов в Чемпионате: от</label>
+            <input type="number" id="tituls"> 
+            <label>до</label>
+            <input type="number" id="tituls_max">
+        </form>
+        <br>
+        <form>
+            <label>Вместимость домашнего стадиона: от</label>
+            <input type="number" id="homestic_stadium">
+            <label>до</label>
+            <input type="number" id="homestic_stadium_max">
+        </form>
+        <br>
+        <input type="button" value="Найти">
+    </details>
+    <br>
 
-			</table>
-<input type="submit" value="Построить">
-</details>
-<br>
+    <details>
+        <summary>Сортировка</summary>
+        <br>
+        <form>
+            <label>Первый уровень:</label>
+            <select name="sort">
+                <option value="0" selected>Нет</option>
+                <option value="1">Год основания</option>
+                <option value="2">Число воспитанников академии ФК</option>
+                <option value="3">Сезонов в ЛЧ</option>
+                <option value="4">Титулов в ЛЧ</option>
+                <option value="5">Вместимость домашнего стадиона</option>
+                <option value="6">Страна</option>
+            </select>
+            <label>по убыванию?</label>
+            <input type="checkbox" name="sorting" value="3">
+        </form>
+        <br>
+        <form>
+            <label>Второй уровень:</label>
+            <select name="sort">
+                <option value="0" selected>Нет</option>
+                <option value="1">Год основания</option>
+                <option value="2">Число воспитанников академии ФК</option>
+                <option value="3">Сезонов в ЛЧ</option>
+                <option value="4">Титулов в ЛЧ</option>
+                <option value="5">Вместимость домашнего стадиона</option>
+                <option value="6">Страна</option>
+            </select>
+            <label>по убыванию?</label>
+            <input type="checkbox" name="sorting" value="3">
+        </form>
+        <br>
+        <form>
+            <label>Третий уровень:</label>
+            <select name="sort">
+                <option value="0" selected>Нет</option>
+                <option value="1">Год основания</option>
+                <option value="2">Число воспитанников академии ФК</option>
+                <option value="3">Сезонов в ЛЧ</option>
+                <option value="4">Титулов в ЛЧ</option>
+                <option value="5">Вместимость домашнего стадиона</option>
+                <option value="6">Страна</option>
+            </select>
+            <label>по убыванию?</label>
+            <input type="checkbox" name="sorting" value="3">
+        </form>
+        <br>
+        <input type="submit" value="Сортировать">
+    </details>
+    <br>
 
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr align="center" bgcolor="grey">
+            <th>Название клуба</th>
+            <th>Страна</th>
+            <th>Год основания</th>
+            <th>Число воспитанников академии ФК в основе</th>
+            <th>Сезонов в ЛЧ</th>
+            <th>Титулы Чемпионата</th>
+            <th>Вместимость домашнего стадиона, тыс.чел</th>
+        </tr>
+        <tr><td>Реал Мадрид</td><td>Испания</td><td>1902</td><td>3</td><td>32</td><td>35</td><td>81.044</td></tr>
+        <tr><td>Барселона</td><td>Испания</td><td>1899</td><td>5</td><td>31</td><td>27</td><td>99.354</td></tr>
+        <tr><td>Бавария</td><td>Германия</td><td>1900</td><td>4</td><td>28</td><td>33</td><td>75.000</td></tr>
+        <tr><td>Бенфика</td><td>Португалия</td><td>1904</td><td>6</td><td>27</td><td>38</td><td>64.642</td></tr>
+        <tr><td>Порту</td><td>Португалия</td><td>1893</td><td>4</td><td>26</td><td>30</td><td>50.033</td></tr>
+        <tr><td>Аякс</td><td>Нидерланды</td><td>1900</td><td>8</td><td>25</td><td>36</td><td>55.865</td></tr>
+        <tr><td>Ювентус</td><td>Италия</td><td>1897</td><td>3</td><td>24</td><td>36</td><td>41.507</td></tr>
+        <tr><td>Милан</td><td>Италия</td><td>1899</td><td>2</td><td>24</td><td>19</td><td>80.018</td></tr>
+        <tr><td>Олимпиакос</td><td>Греция</td><td>1925</td><td>4</td><td>23</td><td>47</td><td>32.115</td></tr>
+        <tr><td>Динамо Киев</td><td>Украина</td><td>1927</td><td>6</td><td>22</td><td>16</td><td>70.050</td></tr>
+        <tr><td>Селтик</td><td>Шотландия</td><td>1887</td><td>7</td><td>21</td><td>53</td><td>60.411</td></tr>
+        <tr><td>Манчестер Юнайтед</td><td>Англия</td><td>1878</td><td>2</td><td>20</td><td>20</td><td>74.310</td></tr>
+        <tr><td>ПСВ</td><td>Нидерланды</td><td>1913</td><td>5</td><td>20</td><td>24</td><td>35.000</td></tr>
+        <tr><td>Галатасарай</td><td>Турция</td><td>1905</td><td>3</td><td>19</td><td>23</td><td>52.652</td></tr>
+        <tr><td>Рейнджерс</td><td>Шотландия</td><td>1872</td><td>6</td><td>18</td><td>55</td><td>51.082</td></tr>
+        <tr><td>Ливерпуль</td><td>Англия</td><td>1892</td><td>3</td><td>17</td><td>19</td><td>53.394</td></tr>
+        <tr><td>Интер</td><td>Италия</td><td>1908</td><td>3</td><td>17</td><td>20</td><td>80.018</td></tr>
+        <tr><td>Олимпик Марсель</td><td>Франция</td><td>1899</td><td>2</td><td>16</td><td>9</td><td>67.394</td></tr>
+        <tr><td>Шахтер Донецк</td><td>Украина</td><td>1936</td><td>3</td><td>16</td><td>13</td><td>52.667</td></tr>
+        <tr><td>Арсенал</td><td>Англия</td><td>1886</td><td>4</td><td>15</td><td>13</td><td>60.704</td></tr>
+        <tr><td>Валенсия</td><td>Испания</td><td>1919</td><td>4</td><td>15</td><td>6</td><td>49.430</td></tr>
+        <tr><td>Олимпик Лион</td><td>Франция</td><td>1950</td><td>5</td><td>15</td><td>7</td><td>59.186</td></tr>
+        <tr><td>Боруссия Дортмунд</td><td>Германия</td><td>1909</td><td>5</td><td>15</td><td>8</td><td>81.365</td></tr>
+        <tr><td>Атлетико Мадрид</td><td>Испания</td><td>1903</td><td>2</td><td>14</td><td>11</td><td>68.456</td></tr>
+        <tr><td>Челси</td><td>Англия</td><td>1905</td><td>2</td><td>14</td><td>6</td><td>40.343</td></tr>
+        <tr><td>Манчестер Сити</td><td>Англия</td><td>1880</td><td>1</td><td>13</td><td>9</td><td>53.400</td></tr>
+        <tr><td>ПСЖ</td><td>Франция</td><td>1970</td><td>1</td><td>13</td><td>11</td><td>47.929</td></tr>
+        <tr><td>Байер Леверкузен</td><td>Германия</td><td>1904</td><td>4</td><td>12</td><td>1</td><td>30.210</td></tr>
+        <tr><td>ЦСКА Москва</td><td>Россия</td><td>1911</td><td>5</td><td>12</td><td>6</td><td>30.457</td></tr>
+        <tr><td>Спартак Москва</td><td>Россия</td><td>1922</td><td>3</td><td>12</td><td>10</td><td>45.360</td></tr>
+        <tr><td>Рома</td><td>Италия</td><td>1927</td><td>4</td><td>11</td><td>3</td><td>72.698</td></tr>
+        <tr><td>Фенербахче</td><td>Турция</td><td>1907</td><td>2</td><td>11</td><td>19</td><td>50.530</td></tr>
+        <tr><td>Зенит</td><td>Россия</td><td>1925</td><td>2</td><td>10</td><td>8</td><td>68.134</td></tr>
+        <tr><td>Наполи</td><td>Италия</td><td>1926</td><td>3</td><td>10</td><td>3</td><td>54.726</td></tr>
+        <tr><td>Спортинг</td><td>Португалия</td><td>1906</td><td>7</td><td>10</td><td>19</td><td>50.095</td></tr>
+        <tr><td>Боруссия Мёнхенгладбах</td><td>Германия</td><td>1900</td><td>4</td><td>9</td><td>5</td><td>54.057</td></tr>
+        <tr><td>Атлетик Бильбао</td><td>Испания</td><td>1898</td><td>9</td><td>8</td><td>8</td><td>53.289</td></tr>
+        <tr><td>Шальке 04</td><td>Германия</td><td>1904</td><td>3</td><td>8</td><td>7</td><td>62.271</td></tr>
+        <tr><td>Тоттенхэм</td><td>Англия</td><td>1882</td><td>2</td><td>7</td><td>2</td><td>62.850</td></tr>
+        <tr><td>Бешикташ</td><td>Турция</td><td>1903</td><td>3</td><td>7</td><td>16</td><td>41.903</td></tr>
+        <tr><td>Фейеноорд</td><td>Нидерланды</td><td>1908</td><td>6</td><td>7</td><td>16</td><td>51.117</td></tr>
+        <tr><td>Севилья</td><td>Испания</td><td>1890</td><td>3</td><td>6</td><td>1</td><td>43.883</td></tr>
+        <tr><td>РБ Лейпциг</td><td>Германия</td><td>2009</td><td>1</td><td>5</td><td>0</td><td>47.069</td></tr>
+        <tr><td>Астон Вилла</td><td>Англия</td><td>1874</td><td>3</td><td>5</td><td>7</td><td>42.785</td></tr>
+        <tr><td>Ньюкасл</td><td>Англия</td><td>1892</td><td>2</td><td>4</td><td>4</td><td>52.305</td></tr>
+        <tr><td>Монако</td><td>Франция</td><td>1924</td><td>4</td><td>4</td><td>8</td><td>16.500</td></tr>
+        <tr><td>Лилль</td><td>Франция</td><td>1944</td><td>5</td><td>4</td><td>4</td><td>50.186</td></tr>
+        <tr><td>Лацио</td><td>Италия</td><td>1900</td><td>3</td><td>3</td><td>2</td><td>70.634</td></tr>
+        <tr><td>Краснодар</td><td>Россия</td><td>2008</td><td>8</td><td>3</td><td>0</td><td>35.179</td></tr>
+        <tr><td>Панатинаикос</td><td>Греция</td><td>1908</td><td>3</td><td>3</td><td>20</td><td>69.618</td></tr>
+    </table>
 
-<details>
-  <summary> Фильтр </summary>
-	<br>
-
-   <form>
-  <label>Название ФК:</label>
-  <input type="text" name="name" id="name">
-</form>
-<br>
-<form>
-  <label>Страна:</label>
-  <input type="text" name="country" id="country">
-</form>
-<br>
-<form>
-  <label>Основан:</label>
-  <input type="number" name="year" id="year">
-</form>
-<br>
-<form>
-  <label>Воспитанников академии ФК в основе:</label>
-  <input type="number" name="academy" id="academy">
-</form>
-<br>
-<form>
-  <label>Сезонов в Лиге Чемпионов: от</label>
-  <input type="number" name="liga" id="liga">
-<label>до</label>
-<input type="number" name="liga_max" id="liga_max">
-</form>
-<br>
-<form>
-  <label>Число титулов в Чемпионате: от</label>
-  <input type="number" name="tituls" id="tituls"> 
-<label>до</label>
-<input type="number" name="tituls_max" id="tituls_max">
-</form>
-<br>
-<form>
-  <label>Вместимость домашнего стадиона: от</label>
-  <input type="number" name="homestic_stadium" id="homestic_stadium">
-<label>до</label>
-<input type="number" name="homestic_stadium_max" id="homestic_stadium_max">
-</form>
-<br>
-<input type="submit" value="Найти">
-</details>
-<br>
-
-
-<details>
-<summary> Сортировка </summary>
-<br>
-
-	<form>
-		<label>Первый уровень:</label>
-	<select name="sort">
-	<option value="0"> Да </option>
-	<option value="1" selected> Нет </option>
-	</select>
-	<label>по убыванию?</label>
-	<input type="checkbox" name="sorting" value="3">
-</form>
-<br>
-
-<form>
-		<label>Второй уровень:</label>
-	<select name="sort">
-	<option value="0"> Да </option>
-	<option value="1" selected> Нет </option>
-	</select>
-	<label>по убыванию?</label>
-	<input type="checkbox" name="sorting" value="3">
-</form>
-<br>
-
-<form>
-		<label>Третий уровень:</label>
-	<select name="sort">
-	<option value="0"> Да </option>
-	<option value="1" selected> Нет </option>
-	</select>
-	<label>по убыванию?</label>
-	<input type="checkbox" name="sorting" value="3">
-</form>
-<br>
-
-<input type="submit" value="Сортировать">
-
-</details>
-<br>
-
-
-
-<table border="1" cellspacing="0" cellpadding="5">
-	<tr align="center" bgcolor="grey">
-		<th>Название клуба</th>
-		<th>Страна</th>
-		<th>Год основания</th>
-		<th>Число воспитанников академии ФК в основе</th>
-		<th>Сезонов в ЛЧ</th>
-		<th>Титулы Чемпионата</th>
-		<th>Вместимость домашнего стадиона, тыс.чел</th>
-	</tr>
-			<tr><td>Реал Мадрид</td><td>Испания</td><td>1902</td><td>3</td><td>32</td><td>35</td><td>81,044</td></tr>
-			<tr><td>Барселона</td><td>Испания</td><td>1899</td><td>5</td><td>31</td><td>27</td><td>99,354</td></tr>
-			<tr><td>Бавария</td><td>Германия</td><td>1900</td><td>4</td><td>28</td><td>33</td><td>75,000</td></tr>
-			<tr><td>Бенфика</td><td>Португалия</td><td>1904</td><td>6</td><td>27</td><td>38</td><td>64,642</td></tr>
-			<tr><td>Порту</td><td>Португалия</td><td>1893</td><td>4</td><td>26</td><td>30</td><td>50,033</td></tr>
-			<tr><td>Аякс</td><td>Нидерланды</td><td>1900</td><td>8</td><td>25</td><td>36</td><td>55,865</td></tr>
-			<tr><td>Ювентус</td><td>Италия</td><td>1897</td><td>3</td><td>24</td><td>36</td><td>41,507</td></tr>
-			<tr><td>Милан</td><td>Италия</td><td>1899</td><td>2</td><td>24</td><td>19</td><td>80,018</td></tr>
-			<tr><td>Олимпиакос</td><td>Греция</td><td>1925</td><td>4</td><td>23</td><td>47</td><td>32,115</td></tr>
-			<tr><td>Динамо Киев</td><td>Украина</td><td>1927</td><td>6</td><td>22</td><td>16</td><td>70,050</td></tr>
-			<tr><td>Селтик</td><td>Шотландия</td><td>1887</td><td>7</td><td>21</td><td>53</td><td>60,411</td></tr>
-			<tr><td>Манчестер Юнайтед</td><td>Англия</td><td>1878</td><td>2</td><td>20</td><td>20</td><td>74,310</td></tr>
-			<tr><td>ПСВ</td><td>Нидерланды</td><td>1913</td><td>5</td><td>20</td><td>24</td><td>35,000</td></tr>
-			<tr><td>Галатасарай</td><td>Турция</td><td>1905</td><td>3</td><td>19</td><td>23</td><td>52,652</td></tr>
-			<tr><td>Рейнджерс</td><td>Шотландия</td><td>1872</td><td>6</td><td>18</td><td>55</td><td>51,082</td></tr>
-			<tr><td>Ливерпуль</td><td>Англия</td><td>1892</td><td>3</td><td>17</td><td>19</td><td>53,394</td></tr>
-			<tr><td>Интер</td><td>Италия</td><td>1908</td><td>3</td><td>17</td><td>20</td><td>80,018</td></tr>
-			<tr><td>Олимпик Марсель</td><td>Франция</td><td>1899</td><td>2</td><td>16</td><td>9</td><td>67,394</td></tr>
-			<tr><td>Шахтер Донецк</td><td>Украина</td><td>1936</td><td>3</td><td>16</td><td>13</td><td>52,667</td></tr>
-			<tr><td>Арсенал</td><td>Англия</td><td>1886</td><td>4</td><td>15</td><td>13</td><td>60,704</td></tr>
-			<tr><td>Валенсия</td><td>Испания</td><td>1919</td><td>4</td><td>15</td><td>6</td><td>49,430</td></tr>
-			<tr><td>Олимпик Лион</td><td>Франция</td><td>1950</td><td>5</td><td>15</td><td>7</td><td>59,186</td></tr>
-			<tr><td>Боруссия Дортмунд</td><td>Германия</td><td>1909</td><td>5</td><td>15</td><td>8</td><td>81,365</td></tr>
-			<tr><td>Атлетико Мадрид</td><td>Испания</td><td>1903</td><td>2</td><td>14</td><td>11</td><td>68,456</td></tr>
-			<tr><td>Челси</td><td>Англия</td><td>1905</td><td>2</td><td>14</td><td>6</td><td>40,343</td></tr>
-			<tr><td>Манчестер Сити</td><td>Англия</td><td>1880</td><td>1</td><td>13</td><td>9</td><td>53,400</td></tr>
-			<tr><td>ПСЖ</td><td>Франция</td><td>1970</td><td>1</td><td>13</td><td>11</td><td>47,929</td></tr>
-			<tr><td>Байер Леверкузен</td><td>Германия</td><td>1904</td><td>4</td><td>12</td><td>1</td><td>30,210</td></tr>
-			<tr><td>ЦСКА Москва</td><td>Россия</td><td>1911</td><td>5</td><td>12</td><td>6</td><td>30,457</td></tr>
-			<tr><td>Спартак Москва</td><td>Россия</td><td>1922</td><td>3</td><td>12</td><td>10</td><td>45,360</td></tr>
-			<tr><td>Рома</td><td>Италия</td><td>1927</td><td>4</td><td>11</td><td>3</td><td>72,698</td></tr>
-			<tr><td>Фенербахче</td><td>Турция</td><td>1907</td><td>2</td><td>11</td><td>19</td><td>50,530</td></tr>
-			<tr><td>Зенит</td><td>Россия</td><td>1925</td><td>2</td><td>10</td><td>8</td><td>68,134</td></tr>
-			<tr><td>Наполи</td><td>Италия</td><td>1926</td><td>3</td><td>10</td><td>3</td><td>54,726</td></tr>
-			<tr><td>Спортинг</td><td>Португалия</td><td>1906</td><td>7</td><td>10</td><td>19</td><td>50,095</td></tr>
-			<tr><td>Боруссия Мёнхенгладбах</td><td>Германия</td><td>1900</td><td>4</td><td>9</td><td>5</td><td>54,057</td></tr>
-			<tr><td>Атлетик Бильбао</td><td>Испания</td><td>1898</td><td>9</td><td>8</td><td>8</td><td>53,289</td></tr>
-			<tr><td>Шальке 04</td><td>Германия</td><td>1904</td><td>3</td><td>8</td><td>7</td><td>62,271</td></tr>
-			<tr><td>Тоттенхэм</td><td>Англия</td><td>1882</td><td>2</td><td>7</td><td>2</td><td>62,850</td></tr>
-			<tr><td>Бешикташ</td><td>Турция</td><td>1903</td><td>3</td><td>7</td><td>16</td><td>41,903</td></tr>
-			<tr><td>Фейеноорд</td><td>Нидерланды</td><td>1908</td><td>6</td><td>7</td><td>16</td><td>51,117</td></tr>
-			<tr><td>Севилья</td><td>Испания</td><td>1890</td><td>3</td><td>6</td><td>1</td><td>43,883</td></tr>
-			<tr><td>РБ Лейпциг</td><td>Германия</td><td>2009</td><td>1</td><td>5</td><td>0</td><td>47,069</td></tr>
-			<tr><td>Астон Вилла</td><td>Англия</td><td>1874</td><td>3</td><td>5</td><td>7</td><td>42,785</td></tr>
-			<tr><td>Ньюкасл</td><td>Англия</td><td>1892</td><td>2</td><td>4</td><td>4</td><td>52,305</td></tr>
-			<tr><td>Монако</td><td>Франция</td><td>1924</td><td>4</td><td>4</td><td>8</td><td>16,500</td></tr>
-			<tr><td>Лилль</td><td>Франция</td><td>1944</td><td>5</td><td>4</td><td>4</td><td>50,186</td></tr>
-			<tr><td>Лацио</td><td>Италия</td><td>1900</td><td>3</td><td>3</td><td>2</td><td>70,634</td></tr>
-			<tr><td>Краснодар</td><td>Россия</td><td>2008</td><td>8</td><td>3</td><td>0</td><td>35,179</td></tr>
-			<tr><td>Панатинаикос</td><td>Греция</td><td>1908</td><td>3</td><td>3</td><td>20</td><td>69,618</td></tr>
-</table>
-
-		<hr>
-<p><strong>Выполнил студент группы Б9123-09.03.04/(3) Земсков Иван</strong></p>
+    <hr>
+    <p><strong>Выполнил студент группы Б9123-09.03.04/(3) Земсков Иван</strong></p>
 </body>
 </html>
-
-
-
