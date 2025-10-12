@@ -1,0 +1,195 @@
+body {
+		margin: 0;
+		padding: 0;
+		font-family: Arial, sans-serif;
+}
+
+h1 {
+		background: #6bb1c9;
+		line-height: 2.5em;
+		padding-left: 23px;
+		margin: 0;
+		font-family: Arial, sans-serif;
+		text-align: left;
+		width: 100%;
+}
+
+.menu {
+   	overflow: hidden;
+		padding: 15px;
+		margin-bottom: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+		display: inline-block;
+}
+
+.menu-item.active {
+		background: #6bb1c9;
+		width: 350px;
+		text-align: center;
+}
+
+.menu-item {
+		display: inline-block;
+		border: 2px solid #6bb1c9;
+		border-color: #6bb1c9;
+		text-align: center;
+		padding: 12px 25px;
+		width: 350px;
+		color: black;
+		font-family: Arial, sans-serif;
+		font-weight: bold;
+		border-radius: 10px;
+	
+}
+
+.container {
+		width: 100%;
+		margin-top: 20px;
+}
+
+.block img {
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+}
+
+.block1 {
+		width: 45%;
+		height: 300px;
+		float: left;
+}
+		.block2 {
+		width: 55%;
+		height: 600px;
+		float: right;
+}
+
+.block3 {
+		width: 45%;
+		height: 300px;
+		float: left;
+}
+
+.block4 {
+		width: 100%;
+		height: 550px;
+		clear: both;
+		margin-bottom: 30px;
+}
+
+
+.container_circles {
+		width: 100%;
+		display: block;
+		margin-bottom: 30px;
+		display: block;
+		text-align: center;
+}
+
+.item {
+		display: inline-block;
+		width: 200px;
+		margin: 30px 40px;
+		vertical-align: top;
+}
+
+.circle {
+		width: 150px;
+		height: 150px;
+		border-radius: 50%;
+		overflow: hidden;
+		margin: 20px auto 15px;
+		border: 2px solid #ccc;
+}
+
+.circle img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+}
+
+.title {
+		font-weight: bold;
+		margin-bottom: 5px;
+		font-size: 20px;
+		display: block;
+}
+
+.text {
+		font-size: 15px;
+		color: #666;
+		margin-bottom: 5px;
+		display: block;
+}
+
+.link {
+		font-size: 13px;
+		color: white;
+		background-color: #6bb1c9;
+
+		width: auto;
+		padding: 0 10px;
+		text-decoration: none;
+}
+
+.club-block {
+		width: 45%;
+		height: 240px;
+		background: #f0f0f0;
+		font-family: Arial, sans-serif;
+		border-radius: 10px;
+		margin-bottom: 20px;
+		overflow: hidden;
+		border: 2px solid #ddd;
+}
+
+.club-image {
+		width: 220px;
+		height: 220px;
+		float: left;
+		margin: 10px;
+		border-radius: 8px;
+		overflow: hidden;
+		display: block;
+}
+
+.club-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+}
+
+.club-text {
+		display: block;
+		padding: 15px 15px 15px 0;
+		margin-left: 120px;
+		height: 200px;
+		line-height: 1.4;
+		overflow: scroll;
+}
+
+.club-left {
+		float: left;
+		margin-left: 2.5%;
+}
+
+.club-right {
+		float: right;
+		margin-right: 2.5%;
+}
+
+.club-clear {
+		clear: both;
+}
+
+span {
+	font-weight: bold;
+}
+        
