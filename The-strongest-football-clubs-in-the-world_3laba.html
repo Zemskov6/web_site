@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Футбольные команды</title>
+    <style>
+        body {
+            margin: 0; 
+            padding: 0;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .header {
+            background: #3e3e3e;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #c2c2c2;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100%;
+        }
+
+        .menu-item {
+            text-decoration: none;
+            color: #c2c2c2;
+            font-weight: bold;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .menu a {
+            text-decoration: none;
+        }
+        
+        .menu-item.active {
+            background: rgb(49, 166, 54);
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .main-container {
+            display: flex;
+            width: 90%;
+            margin: 0 auto;
+            height: 600px;
+        }
+
+        .block {
+            overflow: hidden;
+        }
+
+        .block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .block1 {
+            height: 50%;
+        }
+
+        .block2-container {
+            display: flex;
+            height: 50%;
+        }
+
+        .block2-part1, .block2-part2 {
+            width: 50%;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .block4, .block5, .block3 {
+            height: 33.333%;
+        }
+        
+        .container {
+            width: 90%;
+            margin: 30px auto 30px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .container-block:nth-child(1),
+        .container-block:nth-child(3) {
+            flex: 0 0 70%;
+            overflow: hidden;
+        }
+
+        .container-block:nth-child(2),
+        .container-block:nth-child(4) {
+            flex: 0 0 30%;
+            overflow: hidden;
+        }
+
+        .club-block {
+            width: 100%;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+        }
+        
+        .container-block:nth-child(1) .club-block,
+        .container-block:nth-child(3) .club-block {
+            flex-direction: row;
+        }
+        
+        .container-block:nth-child(2) .club-block,
+        .container-block:nth-child(4) .club-block {
+            flex-direction: row-reverse;
+            border-left: 1px solid #000000;
+        }
+
+        .club-image {
+            width: 35%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .club-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .club-text {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .club-text h2 {
+            margin-top: 0;
+            text-align: right;
+        }
+
+        .club-text ol {
+            padding-left: 20px;
+            flex: 1;
+        }
+
+        .club-text li {
+            margin-bottom: 10px;
+        }
+
+        .link {
+            margin-top: auto;
+            padding: 10px 20px;
+            margin-left: auto;
+        }
+
+        .container_circles {
+					width: 100%;
+					display: flex;
+					justify-content: center;
+					flex-wrap: wrap;
+					column-gap: 8%;
+					align-items: flex-start;
+				}
+			
+        .item {
+            flex: 0 0 10%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .circle {
+            width: 80%;
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 3.5% auto;
+            border: 2px solid #ccc;
+            display: flex;
+        }
+
+        .circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .text {
+            font-size: 15px;
+            color: #000000;
+            margin-bottom: 10%;
+        }
+
+        .link_circle {
+            border-radius: 10%;
+            border-color: #3e3e3e;
+            border: 3px solid #3e3e3e;
+            padding: 2%;
+            color: white;
+            background-color: #3e3e3e;
+        }
+
+        .container-block:nth-child(3) {
+            flex: 70%;
+            
+        }
+
+        .block3-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .block3-header {
+            text-align: center;
+        }
+
+        .block3-main {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .block3-text-left,
+        .block3-text-right {
+            flex: 1;
+            line-height: 1.6;
+            max-width: 35%;
+        }
+
+        .block3-text-left {
+            text-align: left;
+        }
+
+        .block3-text-right {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .block3-image {
+            flex: 200px;
+            height: 100%;
+        }
+
+        .block3-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .footer {
+            margin-top: 40px;
+            background: #3e3e3e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            height: 80px;
+        }
+
+        .footer-text {
+            font-weight: bold;
+            color: #c2c2c2;
+        }
+
+        @media (max-width: 768px) {
+				.header {
+						flex-direction: column;
+						height: auto;
+						padding: 15px 20px;
+				}
+				
+				.logo {
+						margin-bottom: 15px;
+				}
+				
+				.menu {
+						width: 100%;
+						flex-wrap: wrap;
+						height: auto;
+				}
+				
+				.menu-item {
+						width: 50%;
+						height: 60px;
+						box-sizing: border-box;
+				}
+				
+				.main-container {
+						flex-direction: column;
+						height: auto;
+				}
+				
+				.left-column, .right-column {
+						width: 100%;
+				}
+				
+				.block1 {
+						height: 300px;
+				}
+				
+				.block2-container {
+						flex-direction: column;
+						height: auto;
+				}
+				
+				.block2-part1, .block2-part2 {
+						width: 100%;
+						height: 300px;
+				}
+				
+				.block4, .block5, .block3 {
+						height: 200px;
+				}
+				
+				.container_circles {
+						flex-direction: column;
+						align-items: center;
+				}
+				
+				.item {
+						flex: 45%;
+						margin-bottom: 30px;
+				}
+				
+				.container {
+						flex-direction: column;
+				}
+				
+				.container-block:nth-child(1),
+				.container-block:nth-child(2),
+				.container-block:nth-child(3),
+				.container-block:nth-child(4) {
+						flex: 100%;
+						margin-bottom: 30px;
+				}
+				
+				.container .container-block .club-block {
+						flex-direction: column;
+				}
+				
+				.container-block:nth-child(2) .club-block,
+				.container-block:nth-child(4) .club-block {
+						border-left: none;
+				}
+				
+				.club-image {
+						width: 100%;
+						height: 200px;
+				}
+				
+				.container .container-block .club-block .club-text {
+						margin-left: 0;
+						width: 100%;
+				}
+				
+				.club-text h2 {
+						text-align: center;
+				}
+				
+				.block3-main {
+						flex-direction: column;
+				}
+				
+				.block3-text-left,
+				.block3-text-right {
+						max-width: 100%;
+						margin-bottom: 20px;
+				}
+				
+				.block3-image {
+						flex: 200px;
+						width: 100%;
+						margin: 20px 0;
+				}
+				
+				.link {
+						margin-left: 0;
+						text-align: center;
+				}
+		}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><h1>Футбольные клубы мира</h1></div>
+        <nav class="menu">
+            <a href="/Users/zemskov/Documents/Фронтенд/web_site_laba3_flex_grid/The-strongest-football-clubs-in-the-world_3laba.html" class="menu-item active">Самые сильные футбольные клубы мира</a>
+            <a href="List-of-football-clubs-of-the-world_3laba.html" class="menu-item">Список футбольных клубов мира</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="left-column">
+            <div class="block block1"><img src="img/sbornaya-rossii-ne-mozhet-po.jpg" alt="Фото с футболом"></div>
+            <div class="block2-container">
+                <div class="block block2-part1"><img src="img/germaniya-krupno-obygrala-lyuksemburg-v-matche-otbora-na-chm-2026.png" alt="Фото с футболом"></div>
+                <div class="block block2-part2"><img src="img/0_Norway-v-Israel-FIFA-World-Cup-2026-Qualifier.jpg" alt="Фото с футболом"></div>
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="block block4"><img src="img/photo_2025-10-11_15-37-23.jpg" alt="Фото с футболом"></div>
+            <div class="block block5"><img src="img/photo_2025-10-11_15-37-23.jpg" alt="Фото с футболом"></div>
+            <div class="block block3"><img src="img/photo_2025-10-11_15-37-23.jpg" alt="Фото с футболом"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-block">
+            <div class="container_circles">
+                <div class="item">
+                    <div class="circle">
+                        <img src="img/s800.webp" alt="Арсенал">
+                    </div>
+                    <div class="title">ФК Арсенал</div>
+                    <div class="text">Англия</div>
+                    <a href="arsenal_page_3laba.html" class="link_circle">подробнее>></a>
+                </div>
+                
+                <div class="item">
+                    <div class="circle">
+                        <img src="img/man-u-logo-outline_1307376801_img.gif" alt="Манчестер Юнайтед">
+                    </div>
+                    <div class="title">ФК Манчестер Юнайтед</div>
+                    <div class="text">Англия</div>
+                    <a href="#" class="link_circle">подробнее>></a>
+                </div>
+                
+                <div class="item">
+                    <div class="circle">
+                        <img src="img/3a06d623feb3629a7888a39f8f02328f.jpg" alt="ПСЖ">
+                    </div>
+                    <div class="title">ФК ПСЖ</div>
+                    <div class="text">Франция</div>
+                    <a href="#" class="link_circle">подробнее>></a>
+                </div>
+                
+                <div class="item">
+                    <div class="circle">
+                        <img src="img/Bayern_München_Logo_(1996-2002).svg.png" alt="Бавария Мюнхен">
+                    </div>
+                    <div class="title">ФК Бавария Мюнхен</div>
+                    <div class="text">Германия</div>
+                    <a href="#" class="link_circle">подробнее>></a>
+                </div>
+                
+                <div class="item">
+                    <div class="circle">
+                        <img src="img/cb9787d77aeae3adcc108b4776f6d0710c31c5fc_original.jpeg" alt="Ювентус">
+                    </div>
+                    <div class="title">ФК Ювентус</div>
+                    <div class="text">Италия</div>
+                    <a href="#" class="link_circle">подробнее>></a>
+                </div>
+            </div>
+        </div>
+        <div class="container-block">
+            <div class="club-block">
+                <div class="club-image">
+                    <img src="img/il_fullxfull.4980443478_n264.jpg" alt="Интер Милан">
+                </div>
+                <div class="club-text">
+                    <h2>Интер Милан</h2>
+                    <ol>
+                        <li><span>Основан:</span> 9 марта 1908 года, Милан, Италия.</li>
+                        <li><span>Прозвища:</span> «Нерадзурри» (Чёрно-синие), «Баусча» (Змеи).</li>
+                        <li><span>Домашний стадион:</span> «Джузеппе Меацца» (также известен как «Сан-Сиро»).</li>
+                    </ol>
+                    <a href="#" class="link">подробнее>></a>
+                </div>
+            </div>
+        </div>
+        <div class="container-block">
+            <div class="block3-content">
+                <div class="block3-header">
+                    <h2>Атлетико Мадрид</h2>
+                </div>
+                <div class="block3-main">
+                    <div class="block3-text-left">
+                        <p>Атлетико Мадрид — один из самых титулованных клубов Испании, 
+                        известный своей сильной обороной и боевым характером. 
+                        Под руководством Диего Симеоне команда неоднократно выигрывала 
+                        Ла Лигу и достигала финалов Лиги Чемпионов.</p>
+                    </div>
+                    <div class="block3-image">
+                        <img src="img/ede0953463.jpg" alt="Эмблема Антлетико Мадрид">
+                    </div>
+                    <div class="block3-text-right">
+                        <div class="block3-text-content">
+                            <ol>
+                                <li><span>Основан:</span> 26 апреля 1903 года, Мадрид, Испания.</li>
+                                <li><span>Прозвища:</span> «Матрасники», «Красно-белые», «Индиос».</li>
+                                <li><span>Домашний стадион:</span> «Метрополитано» (с 2017 года).</li>
+                            </ol>
+                        </div>
+                        <div class="link">
+                            <a href="#">подробнее>></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-block">
+            <div class="club-block">
+                <div class="club-image">
+                    <img src="img/6552405f9569.jpg" alt="Милан">
+                </div>
+                <div class="club-text">
+                    <h2>Милан</h2>
+                    <ol>
+                        <li><span>Основан:</span> 16 декабря 1899 года, Милан, Италия.</li>
+                        <li><span>Прозвища:</span> «Россонери» (Красно-чёрные), «Дьяволы».</li>
+                        <li><span>Домашний стадион:</span>  «Джузеппе Меацца» (также известен как «Сан-Сиро»).</li>
+                    </ol>
+                    <a href="#" class="link">подробнее>></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="footer-text">Выполнил студент группы Б9123-09.03.04(3) Земсков Иван 2025 год</span>
+    </div>
+</body>
+</html>
