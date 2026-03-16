@@ -1,83 +1,91 @@
-const secretText = 'н,дышгтьа_рлооы_и_оихтчиьаы_ртоёттбмо_тв_к_боо_шжотг_о_ждчуо_,__';
 
-const keys = [
-    'победа',
-    'история', 
-    'хоккей',
-    'засуха',
-    'контент',
-    'астрономия',
-    'космонавт',
-    'подготовка',
-    'судья',
-    'интерфейс',
-    'экология'
-];
+const createOption = (str, val) => {
+    let item = document.createElement('option');
+    item.text = str;
+    item.value = val;
+    return item;
+};
 
-function decodeText(text, key) {
-    const columnsCount = key.length;
-    const textLength = text.length;
-    const rowsCount = Math.ceil(textLength / columnsCount);
-    
-
-    const letters = [];
-    for (let i = 0; i < columnsCount; i++) {
-        letters.push({
-            letter: key[i],
-            position: i
-        });
-    }
-    
-    letters.sort(function(a, b) {
-        if (a.letter < b.letter) return -1;
-        if (a.letter > b.letter) return 1;
-        return a.position - b.position;
+const setSortSelect = (arr, sortSelect) => {
+    sortSelect.innerHTML = '';
+    sortSelect.append(createOption('Нет', 0));
+    arr.forEach((item, index) => {
+        sortSelect.append(createOption(item, index + 1));
     });
-    
-    const columnOrder = [];
-    for (let j = 0; j < columnsCount; j++) {
-        columnOrder.push(letters[j].position);
-    }
-    
-    const table = [];
-    for (let r = 0; r < rowsCount; r++) {
-        const row = [];
-        for (let c = 0; c < columnsCount; c++) {
-            row.push('');
-        }
-        table.push(row);
-    }
+};
 
-    let textIndex = 0;
+const setSortSelects = (data, dataForm) => {
+    const head = Object.keys(data);
+    const allSelect = dataForm.getElementsByTagName('select');
 
-    for (let orderIndex = 0; orderIndex < columnOrder.length; orderIndex++) {
-        const col = columnOrder[orderIndex];
-        
-        for (let row = 0; row < rowsCount; row++) {
-            if (textIndex < textLength) {
-                table[row][col] = text[textIndex];
-                textIndex++;
-            }
+    for (let i = 0; i < allSelect.length; i++) {
+        setSortSelect(head, allSelect[i]);
+        if (i > 0) {
+            allSelect[i].disabled = true;
         }
     }
+    document.getElementById('fieldsSecondDesc').disabled = true;
+};
 
-    let result = '';
-    for (let rowNum = 0; rowNum < rowsCount; rowNum++) {
-        for (let colNum = 0; colNum < columnsCount; colNum++) {
-            result += table[rowNum][colNum];
+const changeNextSelect = (curSelect, nextSelectId) => {
+    let nextSelect = document.getElementById(nextSelectId);
+    let nextCheckbox = document.getElementById(nextSelectId + 'Desc');
+
+    nextSelect.disabled = false;
+    nextCheckbox.disabled = false;
+    nextSelect.innerHTML = curSelect.innerHTML;
+
+    if (curSelect.value != 0) {
+        nextSelect.remove(parseInt(curSelect.value, 10));
+        nextSelect.selectedIndex = 0;
+    } else {
+        nextSelect.disabled = true;
+        nextCheckbox.disabled = true;
+    }
+};
+
+const resetSort = (idTable, sortForm, filterForm, data) => {
+
+    const allSelects = sortForm.getElementsByTagName('select');
+    
+    for (let i = 0; i < allSelects.length; i++) {
+        allSelects[i].value = 0;
+        if (i > 0) {
+            allSelects[i].disabled = true;
         }
     }
     
-    return result;
-}
+    const allCheckboxes = sortForm.querySelectorAll('input[type="checkbox"]');
+    allCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    filterTable(data, idTable, filterForm);
+};
 
 
-for (let i = 0; i < keys.length; i++) {
-    const currentkey = keys[i];
-    console.log('Ключ:' + currentkey);
-    
-    const decoded = decodeText(secretText, currentkey);
-    console.log('Расшифрованный текст: ' + decoded);
-    
-}
+document.addEventListener("DOMContentLoaded", function() {
+    createTable(buildings, 'list');
 
+    const form = document.getElementById("filter");
+    const sortForm = document.getElementById("sort");
+
+    form.querySelector('input[type="button"][value="Найти"]').addEventListener("click", function() {
+        filterTable(buildings, 'list', form);
+        setSortSelects(buildings[0], sortForm);
+    });
+    form.querySelector('input[type="button"][value="Очистить фильтры"]').addEventListener("click", function() {
+        clearFilter('list', buildings, form);
+        setSortSelects(buildings[0], sortForm);
+    });
+
+    setSortSelects(buildings[0], sortForm);
+    document.getElementById("fieldsFirst").addEventListener("change", function() {
+        changeNextSelect(this, "fieldsSecond");
+    });
+    sortForm.querySelector('input[type="button"][value="Сортировать"]').addEventListener("click", function() {
+        sortTable('list', sortForm);
+    });
+    sortForm.querySelector('input[type="button"][value="Сбросить сортировку"]').addEventListener("click", function() {
+        resetSort('list', sortForm, form, buildings);
+    });
+});

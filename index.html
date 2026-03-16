@@ -1,66 +1,72 @@
-<html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="task">
-    <img src="/Users/zemskov/Desktop/laba_7_js/height.png" 
-         alt="Трапеция" id="trapezoidImage">
-    
-    <div class="input">
-        <form id="calcForm">
-            <div class="input-group">
-                <label>Тип входных данных:</label>
-                <select id="dataType">
-                    <option value="base-height">Основание, высота и углы</option>
-                    <option value="four-sides">Четыре стороны</option>
-                </select>
-                <input type="button" value="Показать">
-            </div>
-            
-            <div id="inputFields">
-                <p>
-                    <label>a (основание) = 
-                        <input type="number" id="input1" min="0" max="500" step="0.1">
-                    </label>
-                </p>
-                <p>
-                    <label>h (высота) = 
-                        <input type="number" id="input2" min="0" max="500" step="0.1">
-                    </label>
-                </p>
-                <p>
-                    <label>α (угол слева) = 
-                        <input type="number" id="input3" min="1" max="179" step="0.1">
-                    </label>
-                </p>
-                <p>
-                    <label>β (угол справа) = 
-                        <input type="number" id="input4" min="1" max="179" step="0.1">
-                    </label>
-                </p>
-            </div>
-            
-            <div class="input-group">
-                <label>Вычислить характеристики:</label><br>
-                <select id="calcSelect" multiple size="4">
-                    <option value="area">Площадь</option>
-                    <option value="perimeter">Периметр</option>
-                    <option value="diagonals">Диагонали</option>
-                    <option value="diagonalAngle">Угол между диагоналями</option>
-                </select>
-            </div>
-            
-            <p>
-                <input type="button" value="Вычислить">
-                <input type="button" value="Очистить">
-            </p>
-        </form>
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Фильтры и сортировка</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="JavaScript/data.js"></script>
+    <script src="JavaScript/table.js"></script>
+    <script src="JavaScript/filter.js"></script>
+    <script src="JavaScript/sort.js"></script>
+    <script src="JavaScript/main.js"></script>
+  </head>
+  <body>
+
+    <div class="forms-row">
+      <form id="filter">
+        <h2>Фильтр</h2>
+        <p>
+          <label for="structure">Название:</label>
+          <input type="text" id="structure">
+        </p>
+        <p>
+          <label for="category">Тип:</label>
+          <input type="text" id="category">
+        </p>
+        <p>
+          <label for="country">Страна:</label>
+          <input type="text" id="country">
+        </p>
+        <p>
+          <label for="city">Город:</label>
+          <input type="text" id="city">
+        </p>
+        <p>
+          <label for="yearFrom">Год: </label>
+          от <input type="number" id="yearFrom">
+          до <input type="number" id="yearTo">
+        </p>
+        <p>
+          <label for="heightFrom">Высота:</label>
+          от <input type="number" id="heightFrom">
+          до <input type="number" id="heightTo">
+        </p>
+        <p class="filter-buttons">
+          <input type="button" value="Найти">
+          <input type="button" value="Очистить фильтры">
+        </p>
+      </form>
+
+      <form id="sort">
+        <h2>Сортировка</h2>
+        <p>Сортировать по</p>
+        <p>
+          <select id="fieldsFirst"></select>
+          по убыванию? <input type="checkbox" id="fieldsFirstDesc">
+        </p>
+        <p>
+          <select id="fieldsSecond"></select>
+          по убыванию? <input type="checkbox" id="fieldsSecondDesc">
+        </p>
+        <p class="sort-buttons">
+          <input type="button" value="Сортировать">
+          <input type="button" value="Сбросить сортировку">
+        </p>
+      </form>
     </div>
-    
-    <div id="output"></div>
-</div>
-</body>
-<script src="program.js"></script>
+
+    <table id="list">
+    </table>
+
+  </body>
 </html>
