@@ -3,7 +3,7 @@ const createSortArr = (data) => {
     
     const sortSelects = data.getElementsByTagName('select');
     
-    for (const item of sortSelects) {
+    for (const item of sortSelects) {   
         const keySort = item.value;
         if (keySort == 0) {
             break;
@@ -20,16 +20,17 @@ const createSortArr = (data) => {
 const sortTable = (idTable, formData) => {
 
     const sortArr = createSortArr(formData);
-    
+
     if (sortArr.length === 0) {
-        filterTable(buildings, idTable, document.getElementById('filter'));
+        filterTable(clubs, idTable, document.getElementById('filter-form'));
         return false;
     }
-
+    
     let table = document.getElementById(idTable);
+
     let rowData = Array.from(table.rows);
     
-     const headerRow = rowData.shift();
+    const headerRow = rowData.shift();
     
     rowData.sort((first, second) => {
         for (let { column, direction } of sortArr) {
@@ -40,7 +41,7 @@ const sortTable = (idTable, formData) => {
            const secondNum = parseFloat(secondCell);
            
            let comparison;
-
+           
            if (!isNaN(firstNum) && !isNaN(secondNum)) {
                comparison = firstNum - secondNum;
            } else {
@@ -52,15 +53,13 @@ const sortTable = (idTable, formData) => {
         }
         return 0; 
     });
-    
+
     table.append(headerRow);
-	
-	let tbody = document.createElement('tbody');
+    
+    let tbody = document.createElement('tbody');
     rowData.forEach(item => {
         tbody.append(item);
     });
-	table.append(tbody);
+    table.append(tbody);
 }
-
-
 

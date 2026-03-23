@@ -1,21 +1,23 @@
-const clearTable = (idTable) => {
-    const table = document.getElementById(idTable);
-    if (!table) return;
-    table.innerHTML = '';
-};
-
 const createTable = (data, idTable) => {
     const table = document.getElementById(idTable);
     
-    const header = Object.keys(data[0]);
+    if (!table) return;
+    
+    table.innerHTML = '';
 
+    let header;
+    
+    if (!data || data.length === 0) {
+        return;
+    } else {
+        header = Object.keys(data[0]);
+    }
+   
     const headerRow = createHeaderRow(header);
-    const thead = document.createElement('thead');
-    thead.append(headerRow);
-    table.append(thead);
-
+    table.appendChild(headerRow);
+    
     const bodyRows = createBodyRows(data);
-    table.append(bodyRows);
+    table.appendChild(bodyRows);
 };
 
 const createHeaderRow = (headers) => {
@@ -23,24 +25,31 @@ const createHeaderRow = (headers) => {
     headers.forEach(header => {
         const th = document.createElement('th');
         th.innerHTML = header;
-        tr.append(th);
+        tr.appendChild(th);
     });
     return tr;
 };
 
 const createBodyRows = (data) => {
     const tbody = document.createElement('tbody');
-    const headers = Object.keys(data[0]);
 
-    data.forEach(rowData => {
+    data.forEach(item => {
         const tr = document.createElement('tr');
-        headers.forEach(key => {
+        Object.values(item).forEach(value => {
             const td = document.createElement('td');
-            td.innerHTML = rowData[key];
-            tr.append(td);
+            td.innerHTML = value;
+            tr.appendChild(td);
         });
-        tbody.append(tr);
+
+        tbody.appendChild(tr);
     });
 
     return tbody;
+};
+
+const clearTable = (idTable) => {
+    const table = document.getElementById(idTable);
+    if (table) {
+        table.innerHTML = '';
+    }
 };

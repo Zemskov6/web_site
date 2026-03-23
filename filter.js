@@ -1,21 +1,20 @@
 const correspond = {
-    "Название": "structure",
-    "Тип": "category",
+    "Название клуба": "name",
     "Страна": "country",
-    "Город": "city",
-    "Год": ["yearFrom", "yearTo"],
-    "Высота": ["heightFrom", "heightTo"]
-}
+    "Год основания": "year",
+    "Число воспитанников академии ФК в основе": ["academyFrom", "academyTo"],
+    "Сезонов в ЛЧ": ["ligaFrom", "ligaTo"],
+    "Титулы Чемпионата": ["titulsFrom", "titulsTo"],
+    "Вместимость домашнего стадиона, тыс.чел": ["homestic_stadiumFrom", "homestic_stadiumTo"]
+};
 
 const dataFilter = (dataForm) => {
     
     let dictFilter = {};
-    for (const item of dataForm.elements) {
-        
-        if (!item.id) continue;
-  
-        let valInput = item.value;
 
+    for (const item of dataForm.elements) {
+
+        let valInput = item.value;
         if (item.type === "text") {
             valInput = valInput.toLowerCase();
         } 
@@ -39,14 +38,14 @@ const dataFilter = (dataForm) => {
 }
 
 const filterTable = (data, idTable, dataForm) =>{
-    
+
     const datafilter = dataFilter(dataForm);
-    
+
     let tableFilter = data.filter(item => {
 
         let result = true;
         
-         Object.entries(item).map(([key, val]) => {
+        Object.entries(item).map(([key, val]) => {
             
             if (typeof val == 'string') {
                 const filterValue = datafilter[correspond[key]];
@@ -54,19 +53,35 @@ const filterTable = (data, idTable, dataForm) =>{
                     result &&= val.toLowerCase().includes(filterValue);
                 }
             }
-			
+            
             if (typeof val == 'number') {
-                if (key === "Год") {
-                    const from = datafilter['yearFrom'];
-                    const to = datafilter['yearTo'];
+                if (key === "Число воспитанников академии ФК в основе") {
+                    const from = datafilter['academyFrom'];
+                    const to = datafilter['academyTo'];
                     if (from !== -Infinity || to !== Infinity) {
                         result &&= (val >= from && val <= to);
                     }
                 }
 
-                if (key === "Высота") {
-                    const from = datafilter['heightFrom'];
-                    const to = datafilter['heightTo'];
+                if (key === "Сезонов в ЛЧ") {
+                    const from = datafilter['ligaFrom'];
+                    const to = datafilter['ligaTo'];
+                    if (from !== -Infinity || to !== Infinity) {
+                        result &&= (val >= from && val <= to);
+                    }
+                }
+
+                if (key === "Титулы Чемпионата") {
+                    const from = datafilter['titulsFrom'];
+                    const to = datafilter['titulsTo'];
+                    if (from !== -Infinity || to !== Infinity) {
+                        result &&= (val >= from && val <= to);
+                    }
+                }
+
+                if (key === "Вместимость домашнего стадиона, тыс.чел") {
+                    const from = datafilter['homestic_stadiumFrom'];
+                    const to = datafilter['homestic_stadiumTo'];
                     if (from !== -Infinity || to !== Infinity) {
                         result &&= (val >= from && val <= to);
                     }
@@ -76,25 +91,18 @@ const filterTable = (data, idTable, dataForm) =>{
 
          return result;
     });     
-    clearTable(idTable);
 
+    clearTable(idTable);
     createTable(tableFilter, idTable);  
 }
 
-
 const clearFilter = (idTable, originalData, filterForm) => {
-
-    const elements = filterForm.elements;
-    
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-
+    Array.from(filterForm.elements).forEach(element => {
         if (element.type === 'text' || element.type === 'number') {
             element.value = '';
         }
-    }
+    });
     
     clearTable(idTable);
-    
     createTable(originalData, idTable);
-}
+};
