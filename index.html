@@ -1,72 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <title>Фильтры и сортировка</title>
-    <link rel="stylesheet" href="CSS/style.css">
-    <script src="JavaScript/data.js"></script>
-    <script src="JavaScript/table.js"></script>
-    <script src="JavaScript/filter.js"></script>
-    <script src="JavaScript/sort.js"></script>
-    <script src="JavaScript/main.js"></script>
-  </head>
-  <body>
-
-    <div class="forms-row">
-      <form id="filter">
-        <h2>Фильтр</h2>
-        <p>
-          <label for="structure">Название:</label>
-          <input type="text" id="structure">
-        </p>
-        <p>
-          <label for="category">Тип:</label>
-          <input type="text" id="category">
-        </p>
-        <p>
-          <label for="country">Страна:</label>
-          <input type="text" id="country">
-        </p>
-        <p>
-          <label for="city">Город:</label>
-          <input type="text" id="city">
-        </p>
-        <p>
-          <label for="yearFrom">Год: </label>
-          от <input type="number" id="yearFrom">
-          до <input type="number" id="yearTo">
-        </p>
-        <p>
-          <label for="heightFrom">Высота:</label>
-          от <input type="number" id="heightFrom">
-          до <input type="number" id="heightTo">
-        </p>
-        <p class="filter-buttons">
-          <input type="button" value="Найти">
-          <input type="button" value="Очистить фильтры">
-        </p>
-      </form>
-
-      <form id="sort">
-        <h2>Сортировка</h2>
-        <p>Сортировать по</p>
-        <p>
-          <select id="fieldsFirst"></select>
-          по убыванию? <input type="checkbox" id="fieldsFirstDesc">
-        </p>
-        <p>
-          <select id="fieldsSecond"></select>
-          по убыванию? <input type="checkbox" id="fieldsSecondDesc">
-        </p>
-        <p class="sort-buttons">
-          <input type="button" value="Сортировать">
-          <input type="button" value="Сбросить сортировку">
-        </p>
-      </form>
-    </div>
-
-    <table id="list">
-    </table>
-
-  </body>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="CSS/style.css">
+	<script src="JavaScript/main.js"></script>
+	<script src="JavaScript/image.js"></script>
+	<script src="JavaScript/path.js"></script>
+  <script src="d3.v7.min.js"></script>
+</head>
+<body>
+  <form id="form">
+  <label>Длительность (мс):</label><input type="number" id="duration" value="5000" min="500"><br>
+	<label>Масштаб от:</label><input type="number" id="minScale" value="0.5" min="0.1" max="2" step="0.1"><br>
+	<label>Масштаб до:</label><input type="number" id="maxScale" value="1" min="0.1" max="2" step="0.1"><br>
+  <label>Вращение:</label><input type="number" id="rotation" value="90"><br>
+  <button type="button" id="btn-start">Запустить</button>
+  <button type="button" id="btn-clear">Очистить</button>
+</form>
+  <svg id="svg"></svg>
+</body>
 </html>
