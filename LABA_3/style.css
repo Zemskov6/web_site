@@ -1,0 +1,67 @@
+body
+{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.title
+{
+    text-align: center;
+}
+
+.subtitle
+{
+    text-align: center;
+}
+
+.menu
+{
+    list-style-type: circle;
+}
+
+.menu a
+{
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.line
+{
+    width: 100%;
+    height: 2px;
+    background: gray;
+    border: none;
+}
+
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td
+{
+    border: 1px solid black;
+}
+
+th, td
+{
+    padding: 8px;
+}
+
+svg {
+    width: 800px;
+    height: 400px;
+}
+svg text {
+    font: 8px Verdana;
+}
+svg path, line {
+    fill: none;
+    stroke: #333333;
+    width: 1px;
+}
+
+#oy-error {
+    color: red;
+}
