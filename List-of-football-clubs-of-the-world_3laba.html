@@ -9,7 +9,9 @@
       rel="stylesheet"
     />
     <script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/d3.v7.min.js"></script>
     <script src="js/data.js"></script>
+		<script src="js/chart.js"></script>
     <script src="js/table.js"></script>
     <script src="js/filter.js"></script>
     <script src="js/sort.js"></script>
@@ -44,26 +46,38 @@
     </nav>
 </header>
 
-    <details>
-            <summary>График</summary>
-            <br>
-            <form>
-                    Значение по оси ОХ:<br>
-                    <input type="radio" name="type" id="c" value="c"> Страна <br>
-                    <input type="radio" name="type" id="y" value="y"> Год основания
-                    <br>
-                    <br>
-                    Результат:<br>
-                    <input type="checkbox" id="val" value="0"> Максимальное количество титулов в Чемпионате <br>
-                    <input type="checkbox" id="val1" value="1"> Минимальное количество титулов в Чемпионате <br>
-                    <input type="checkbox" id="val2" value="2"> Максимальное количество сезонов в ЛЧ <br>
-                    <input type="checkbox" id="val3" value="3"> Минимальное количество сезонов в ЛЧ
-            </form>
-            <input type="button" value="Построить">
-    </details>
+<details>
+    <summary>График</summary>
+    <form id="chart-form">
+
+        <b>Значение по оси ОХ</b><br>
+        <label><input type="radio" name="x_axis" value="Страна" checked> Страна</label><br>
+        <label><input type="radio" name="x_axis" value="Название клуба"> Название клуба</label><br><br>
+
+        <div id="oy-group" class="form-group">
+            <b>Результат</b><br>
+           <label><input type="checkbox" name="max_tituls"> Максимальное количество титулов в Чемпионате</label><br>
+            <label><input type="checkbox" name="min_tituls"> Минимальное количество титулов в Чемпионате</label><br>
+            <label><input type="checkbox" name="max_champs"> Максимальное количество сезонов в ЛЧ</label><br>
+            <label><input type="checkbox" name="min_champs"> Минимальное количество сезонов в ЛЧ</label><br>
+        </div>
+        <div id="oy-error" class="error-message" style="display: none; color: red;"></div>
+
+        <b>Тип диаграммы</b><br>
+        <label><input type="radio" name="chart_type" value="bar" checked> Столбчатая</label><br>
+        <label><input type="radio" name="chart_type" value="scatter"> Точечная</label><br>
+        <label><input type="radio" name="chart_type" value="line"> Линейный график</label><br><br>
+
+        <input type="button" id="buildChartBtn" value="Построить график">
+        <br></br>
+
+    </form>
+
+    <svg width="800" height="400" style="border: 1px solid #ccc;"></svg>
+
+</details>
 
 <details>
-
 <summary>Фильтр</summary>
 
 <form id="filter-form">
