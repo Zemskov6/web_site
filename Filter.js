@@ -3,91 +3,126 @@ const Filter = (props) => {
         event.preventDefault();
 
         const filterField = {
-            'Название' : event.target['structure'].value.toLowerCase(),
-            'Тип' : event.target['type'].value.toLowerCase(),
-            'Страна' : event.target['country'].value.toLowerCase(),
-            'Город' : event.target['city'].value.toLowerCase(),
-            'Год' : [event.target['year_start'].value, event.target['year_end'].value],
-            'Высота' : [event.target['height_start'].value, event.target['height_end'].value]
+            'Название клуба': event.target['clubName']?.value.toLowerCase() || '',
+            'Страна': event.target['country']?.value.toLowerCase() || '',
+            'Год основания': event.target['year']?.value || '',
+            'Число воспитанников академии ФК в основе': [
+                event.target['academyFrom']?.value || '',
+                event.target['academyTo']?.value || ''
+            ],
+            'Сезонов в ЛЧ': [
+                event.target['championsFrom']?.value || '',
+                event.target['championsTo']?.value || ''
+            ],
+            'Титулы Чемпионата': [
+                event.target['titlesFrom']?.value || '',
+                event.target['titlesTo']?.value || ''
+            ],
+            'Вместимость домашнего стадиона, тыс.чел': [
+                event.target['stadiumFrom']?.value || '',
+                event.target['stadiumTo']?.value || ''
+            ]
         };
 
-        let arr = props.fullData;
+        let arr = [...props.fullData];
+        
         for (const key in filterField) {
             const value = filterField[key];
 
-            if (key === 'Год' || key === 'Высота') {
+            if (Array.isArray(value)) {
                 let [min, max] = value;
+                
                 if (min === '') {
                     min = -Infinity;
-                }
-                else {
+                } else {
                     min = Number(min);
                 }
 
                 if (max === '') {
                     max = Infinity;
-                }
-                else {
+                } else {
                     max = Number(max);
                 }
 
                 arr = arr.filter(item => {
-                    return item[key] >= min && item[key] <= max;
+                    const itemValue = Number(item[key]);
+                    if (isNaN(itemValue)) return false;
+                    return itemValue >= min && itemValue <= max;
                 });
-            }
-            else if (value && value !== '') {
-                arr = arr.filter(item => item[key].toLowerCase().includes(value));
+            } else if (key === 'Год основания') {
+                if (value !== '') {
+                    const year = Number(value);
+                    if (!isNaN(year)) {
+                        arr = arr.filter(item => Number(item[key]) === year);
+                    }
+                }
+            } else if (value && value !== '') {
+                arr = arr.filter(item => 
+                    String(item[key]).toLowerCase().includes(value)
+                );
             }
         }
 
         props.filtering(arr);
-    }
+    };
 
     const handleReset = (event) => {
         event.target.reset();
-        props.filtering([...props.fullData]);
-    }
+        props.onFiltersCleared();
+    };
 
     return (
         <form onSubmit={handleSubmit} onReset={handleReset}>
             <p>
-                <label>Название: </label>
-                <input name='structure' type="text" />
-            </p>
-            <p>
-                <label>Тип: </label>
-                <input name='type' type="text" />
+                <label>Название клуба: </label>
+                <input name='clubName' type="text" />
             </p>
             <p>
                 <label>Страна: </label>
                 <input name='country' type="text" />
             </p>
             <p>
-                <label>Город: </label>
-                <input name='city' type="text" />
+                <label>Год основания: </label>
+                <input name='year' type="number" />
             </p>
             <p>
-                <label>Год от: </label>
-                <input name='year_start' type="number" />
+                <label>Число воспитанников академии в основе от: </label>
+                <input name='academyFrom' type="number" step="any" />
             </p>
             <p>
-                <label>Год до: </label>
-                <input name='year_end' type="number" />
+                <label>Число воспитанников академии в основе до: </label>
+                <input name='academyTo' type="number" step="any" />
             </p>
             <p>
-                <label>Высота от: </label>
-                <input name='height_start' type="number" />
+                <label>Сезонов в ЛЧ от: </label>
+                <input name='championsFrom' type="number" step="any" />
             </p>
             <p>
-                <label>Высота до: </label>
-                <input name='height_end' type="number" />
+                <label>Сезонов в ЛЧ до: </label>
+                <input name='championsTo' type="number" step="any" />
             </p>
             <p>
-                <button type="submit">Фильтровать</button>
-                <button type="reset">Очистить фильтр</button>
+                <label>Титулы чемпионата от: </label>
+                <input name='titlesFrom' type="number" step="any" />
+            </p>
+            <p>
+                <label>Титулы чемпионата до: </label>
+                <input name='titlesTo' type="number" step="any" />
+            </p>
+            <p>
+                <label>Вместимость стадиона (тыс.чел) от: </label>
+                <input name='stadiumFrom' type="number" step="any" />
+            </p>
+            <p>
+                <label>Вместимость стадиона (тыс.чел) до: </label>
+                <input name='stadiumTo' type="number" step="any" />
+            </p>
+            <p>
+                <button type="submit">Найти</button>
+                <button type="reset">Очистить фильтры</button>
             </p>
         </form>
     );
-}
+};
 
 export default Filter;

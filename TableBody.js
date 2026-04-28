@@ -1,33 +1,25 @@
-import TableRow from './TableRow.js';
-
-/*
-   компонент, для вывода tbody таблицы
-   пропсы:
-      body - данные для таблицы в виде массива объектов
-      numPage - номер текущей страницы
-      amountRows - количество строк таблицы на странице
-*/
+import TableRow from './TableRow';
 
 const TableBody = (props) => {
-    // номера строк, отображаемых на странице
-    const begRange = (props.numPage - 1) * props.amountRows;
-    const endRange = begRange + Number(props.amountRows);
+  const paginate = props.paginate !== false;
+  const n = Number(props.amountRows) || 1;
+  const maxPage = Math.max(1, Math.ceil(props.body.length / n));
+  const page = Math.min(Math.max(1, parseInt(props.numPage, 10) || 1), maxPage);
+  const start = (page - 1) * n;
 
-    //формируем строки на основе переданных данных
-    const tbody = props.body.map((item, index) =>
-       // оставляем видимыми только строки, индексы которых принадлежат интервалу
-        <tr key={index} className={
-           (index >= begRange && index < endRange) ? "show" : "hide"
-        }> 
-            <TableRow row={ Object.values(item) } isHead="0"/>
-        </tr>
-        ); 
- 
-    return (
-        <tbody>
-            {tbody}
-        </tbody>
-    )
-}
+  const rows = paginate ? props.body.slice(start, start + n) : props.body;
+
+  return (
+    <tbody>
+      {rows.map((item, i) => (
+        <TableRow
+          key={paginate ? start + i : i}
+          row={Object.values(item)}
+          isHead="0"
+        />
+      ))}
+    </tbody>
+  );
+};
 
 export default TableBody;

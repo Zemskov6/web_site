@@ -1,18 +1,9 @@
-import TableRow from './TableRow.js';
+import TableRow from './TableRow';
 
-/*
-   компонент, для вывода thead таблицы
-   пропсы:
-      head - данные для шапки таблицы в виде массива
-*/
-const TableHead = (props) => {
-    return (
-        <thead>
-            <tr>   
-                <TableRow row={ props.head } isHead="1"/>
-            </tr>
-        </thead>
-    )
-}
+const TableHead = (props) => (
+  <thead>
+    <TableRow row={props.head} isHead="1" />
+  </thead>
+);
 
 export default TableHead;

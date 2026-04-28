@@ -1,62 +1,105 @@
+import { useState, useEffect } from "react";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
-import { useState } from "react";
 import Filter from "./Filter";
+import SortLevels from "./SortLevels";
 
 const Table = (props) => {
-    const n = Math.ceil(props.data.length / props.amountRows);
-    const [activePage, setActivePage] = useState(String(n));
+    const [activePage, setActivePage] = useState("1");
+    const { 
+        showPagination = true, 
+        amountRows = 1, 
+        data: fullData, 
+        onFilterChange 
+    } = props;
 
     const changeActive = (event) => {
-        setActivePage(event.target.innerHTML);
+        setActivePage(event.target.textContent);
     };
 
-    const [dataTable, setDataTable] = useState(props.data);
-    const updateDateTable = (value) =>{
-        setDataTable(value);
-        const newN = Math.ceil(value.length / props.amountRows);
-        setActivePage(String(newN));
+    const paginationEnabled = showPagination !== false;
+    const rowsAmount = Number(amountRows) || 1;
+
+    const [filteredData, setFilteredData] = useState(() => [...fullData]);
+    const [sortedData, setSortedData] = useState(() => [...filteredData]);
+    const [sortMountKey, setSortMountKey] = useState(0);
+
+    useEffect(() => {
+        if (onFilterChange) {
+            onFilterChange(sortedData);
+        }
+    }, [sortedData, onFilterChange]);
+
+    const updateFiltered = (value) => {
+        setFilteredData(value);
+        setSortedData(value);
+        setActivePage("1");
+        setSortMountKey(prev => !prev); 
+    };
+
+    const updateSort = (sorted) => {
+        setSortedData(sorted);
+        setActivePage("1");
+    };
+
+    const handleFiltersCleared = () => {
+        setFilteredData([...fullData]);
+        setSortedData([...fullData]);
+        setActivePage("1");
+        setSortMountKey(prev => !prev); 
+    };
+
+    const maxPage = Math.max(1, Math.ceil(sortedData.length / rowsAmount));
+    const currentPageNum = Math.min(Math.max(1, parseInt(activePage, 10)), maxPage);
+    const validActivePage = String(currentPageNum);
+
+    if (validActivePage !== activePage) {
+        setActivePage(validActivePage);
     }
 
-    const showPag = props.showPag === true;
+    const pageCount = Math.max(1, Math.ceil(sortedData.length / rowsAmount));
+    const columnKeys = Object.keys(fullData[0] || {});
 
-    const displayData = showPag ? dataTable : dataTable;
-    const numRows = showPag ? props.amountRows : displayData.length;
-
-    const n2 = showPag ? Math.ceil(dataTable.length / props.amountRows) : 1;
-
-    const arr = Array.from({length : n2}, (v, i) => i + 1);
-
-    const pages = arr.map((item, index) =>
-                    <span key={index} className={
-                          Number(activePage) === item ? 'active' : ''}
-                          onClick={changeActive}
-                    >
-                        {item}
-                    </span>
-    );
+    const pages = Array.from({ length: pageCount }, (_, i) => i + 1).map((item, index) => (
+        <span
+            key={index}
+            className={Number(activePage) === item ? "active" : ""}
+            onClick={changeActive}
+        >
+            {item}
+        </span>
+    ));
 
     return (
         <>
             <h4>Фильтры</h4>
-            <Filter filtering={updateDateTable} data={dataTable} fullData={props.data} />
+            <Filter
+                filtering={updateFiltered}
+                fullData={fullData}
+                onFiltersCleared={handleFiltersCleared}
+            />
 
-            <table>
-                <TableHead head={Object.keys(props.data[0])} />
-                <TableBody body={displayData} 
-                           amountRows={numRows} 
-                           numPage={showPag ? activePage : 1}
+            <h4>Сортировка</h4>
+            <SortLevels
+                key={sortMountKey}
+                columns={columnKeys}
+                currentData={filteredData}
+                onApply={updateSort}
+            />
 
+            <table className="bridges-table">
+                <TableHead head={columnKeys} />
+                <TableBody
+                    body={sortedData}
+                    amountRows={amountRows}
+                    numPage={activePage}
+                    paginate={paginationEnabled}
                 />
             </table>
 
-            {showPag && (
-                <div id="pag">
-                    {pages}
-                </div>
-            )}
+            {paginationEnabled && <div id="pag">{pages}</div>}
         </>
     );
-}
+};
 
 export default Table;
