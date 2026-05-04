@@ -6,6 +6,7 @@ const Chart = (props) => {
   const [ox, setOx] = useState('Название клуба');
   const [oy, setOy] = useState([true, false, false, false]);
   const [chartType, setChartType] = useState('Столбчатая диаграмма');
+  const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,6 +18,11 @@ const Chart = (props) => {
       form.oyMinSeasons.checked
     ];
 
+    if (!nextOy[0] && !nextOy[1] && !nextOy[2] && !nextOy[3]) {
+      setError('Выберите минимум одно значение по оси OY.');
+      return;
+    }
+    setError('');
     setOx(form.ox.value);
     setOy(nextOy);
     setChartType(form.chartType.value);
@@ -38,7 +44,6 @@ const Chart = (props) => {
         values: [titlesMinMax[1], titlesMinMax[0], seasonsMinMax[1], seasonsMinMax[0]]
       });
     }
-
 
     if (selectedOx === 'Год основания') {
       arrGraph.sort((a, b) => Number(a.labelX) - Number(b.labelX));
@@ -65,8 +70,10 @@ const Chart = (props) => {
           Год основания
         </div>
         
-        <p>Значение по оси OY:</p>
-        <div>
+        <p>
+          Значение по оси OY:
+        </p>
+        <div onChange={() => setError('')}>
           <input type="checkbox" name="oyMaxTitles" defaultChecked={oy[0] === true} />
           Максимальное количество титулов в Чемпионате
           <br />
@@ -80,6 +87,8 @@ const Chart = (props) => {
           Минимальное количество сезонов в ЛЧ
         </div>
         
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        
         <p>
           <label>Тип диаграммы: </label>
           <select name="chartType" defaultValue={chartType}>
@@ -91,7 +100,7 @@ const Chart = (props) => {
           <button type="submit">Построить</button>
         </p>
       </form>
-      <ChartDraw data={createArrGraph(props.data, ox)} oy={oy} chartType={chartType} />
+      {!error && <ChartDraw data={createArrGraph(props.data, ox)} oy={oy} chartType={chartType} />}
     </div>
   );
 };
