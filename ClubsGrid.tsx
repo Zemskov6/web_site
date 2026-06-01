@@ -1,4 +1,5 @@
 import { Box, Link as MuiLink } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { topClubs, detailedClubs } from '../data/footballClubs';
 
 function ClubsGrid() {
@@ -44,6 +45,8 @@ function ClubsGrid() {
               }}
             >
               <Box
+                component={Link}
+                to={club.link}
                 sx={{
                   width: '80%',
                   maxWidth: '150px',
@@ -72,7 +75,8 @@ function ClubsGrid() {
                 {club.country}
               </Box>
               <MuiLink
-                href={club.link}
+                component={Link}
+                to={club.link}
                 sx={{
                   borderRadius: '10%',
                   borderColor: '#3e3e3e',
@@ -86,7 +90,7 @@ function ClubsGrid() {
                   },
                 }}
               >
-                подробнее&gt;&gt;
+                подробнее
               </MuiLink>
             </Box>
           ))}
@@ -143,7 +147,8 @@ function ClubsGrid() {
               <li><span>Домашний стадион:</span> {detailedClubs[0].stadium}</li>
             </ol>
             <MuiLink
-              href={detailedClubs[0].link}
+              component={Link}
+              to={detailedClubs[0].link}
               sx={{
                 marginTop: 'auto',
                 padding: '10px 20px',
@@ -155,7 +160,7 @@ function ClubsGrid() {
                 },
               }}
             >
-              подробнее&gt;&gt;
+              подробнее
             </MuiLink>
           </Box>
         </Box>
@@ -236,7 +241,8 @@ function ClubsGrid() {
               </Box>
               <Box sx={{ marginTop: 'auto', padding: '10px 20px' }}>
                 <MuiLink
-                  href={detailedClubs[1].link}
+                  component={Link}
+                  to={detailedClubs[1].link}
                   sx={{
                     textDecoration: 'none',
                     color: '#1976d2',
@@ -245,7 +251,7 @@ function ClubsGrid() {
                     },
                   }}
                 >
-                  подробнее&gt;&gt;
+                  подробнее
                 </MuiLink>
               </Box>
             </Box>
@@ -302,7 +308,8 @@ function ClubsGrid() {
               <li><span>Домашний стадион:</span> {detailedClubs[2].stadium}</li>
             </ol>
             <MuiLink
-              href={detailedClubs[2].link}
+              component={Link}
+              to={detailedClubs[2].link}
               sx={{
                 marginTop: 'auto',
                 padding: '10px 20px',
@@ -314,7 +321,7 @@ function ClubsGrid() {
                 },
               }}
             >
-              подробнее&gt;&gt;
+              подробнее
             </MuiLink>
           </Box>
         </Box>

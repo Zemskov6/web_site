@@ -1,16 +1,18 @@
-import Navbar from "../components/Navbar";
-import Gallery from "./components/Gallery";
-import Content from "./components/Content";
-import Footer from "../components/Footer";
+import CssBaseline from '@mui/material/CssBaseline';
+import Navbar from '../components/Navbar';
+import MainContent from '../components/MainContent';
+import ClubsGrid from '../components/ClubsGrid';
+import Footer from '../components/Footer';
 
 function Main() {
   return (
-    <div>
+    <>
+      <CssBaseline />
       <Navbar active="1" />
-      <Gallery />
-      <Content />
+      <MainContent />
+      <ClubsGrid />
       <Footer />
-    </div>
+    </>
   );
 }
 

@@ -12,6 +12,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { Link } from 'react-router-dom';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -24,12 +25,19 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   padding: '8px 12px',
 }));
 
+const menuLinks = [
+  { label: 'Самые сильные футбольные клубы мира', to: '/', active: '1' },
+  { label: 'Список футбольных клубов мира', to: '/list', active: '2' },
+  { label: 'Диаграммы', to: '/charts', active: '3' },
+];
+
 interface ComponentProps {
   active: string;
 }
 
 function Navbar({ active }: ComponentProps) {
   const [open, setOpen] = React.useState(false);
+
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
@@ -41,21 +49,39 @@ function Navbar({ active }: ComponentProps) {
         boxShadow: 0,
         bgcolor: 'transparent',
         mt: '28px',
+				mb: '32px',
       }}
     >
       <Container maxWidth="xl">
         <StyledToolbar>
-          <Typography variant="h6" sx={{ color: '#3e3e3e' }}>
+          <Typography variant="h6" sx={{ color: '#3e3e3e', fontWeight: 'bold' }}>
             Футбольные клубы мира
           </Typography>
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button variant={active === '1' ? 'contained' : 'text'} color="info" size="medium">
-              Самые сильные футбольные клубы мира
-            </Button>
-            <Button variant={active === '2' ? 'contained' : 'text'} color="info" size="medium">
-              Список футбольных клубов мира
-            </Button>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+            {menuLinks.map((item) => (
+              <Button
+                key={item.label}
+                component={Link}
+                to={item.to}
+                variant={active === item.active ? 'contained' : 'text'}
+                color="info"
+                size="medium"
+                sx={{
+                  textTransform: 'none',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                  ...(active === item.active && {
+                    bgcolor: '#4a90e2',
+                    '&:hover': {
+                      bgcolor: '#3a7bc8',
+                    },
+                  }),
+                }}
+              >
+                {item.label}
+              </Button>
+            ))}
           </Box>
 
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -63,25 +89,42 @@ function Navbar({ active }: ComponentProps) {
               <MenuIcon />
             </IconButton>
 
-            <Drawer
-              anchor="top"
-              open={open}
-              onClose={toggleDrawer(false)}
-            >
+            <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
               <Box>
                 <Box
                   sx={{
                     display: 'flex',
                     justifyContent: 'flex-end',
+                    p: 1,
                   }}
                 >
                   <IconButton onClick={toggleDrawer(false)}>
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-                <MenuList>
-                  <MenuItem selected={active === '1'} sx={{ '&:hover': { color: '#3e3e3e' } }}>Самые сильные футбольные клубы мира</MenuItem>
-                  <MenuItem selected={active === '2'} sx={{ '&:hover': { color: '#3e3e3e' } }}>Список футбольных клубов мира</MenuItem>
+                <MenuList sx={{ width: '100%', minWidth: 300 }}>
+                  {menuLinks.map((item) => (
+                    <MenuItem
+                      key={item.label}
+                      component={Link}
+                      to={item.to}
+                      selected={active === item.active}
+                      onClick={toggleDrawer(false)}
+                      sx={{
+                        '&:hover': {
+                          color: '#4a90e2',
+                          backgroundColor: 'rgba(74, 144, 226, 0.08)',
+                        },
+                        ...(active === item.active && {
+                          color: '#4a90e2',
+                          fontWeight: 'bold',
+                          backgroundColor: 'rgba(74, 144, 226, 0.12)',
+                        }),
+                      }}
+                    >
+                      {item.label}
+                    </MenuItem>
+                  ))}
                 </MenuList>
               </Box>
             </Drawer>

@@ -7,11 +7,18 @@ import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
+import {
+  OY_MAX_TITLES,
+  OY_MIN_TITLES,
+  OY_MAX_UCL,
+  OY_MIN_UCL,
+} from '../groupdata';
 
 export type tSeries = {
-  'Максимальная высота': boolean;
-  'Средняя высота': boolean;
-  'Минимальная высота': boolean;
+  [OY_MAX_TITLES]: boolean;
+  [OY_MIN_TITLES]: boolean;
+  [OY_MAX_UCL]: boolean;
+  [OY_MIN_UCL]: boolean;
 };
 
 type CheckboxProps = {
@@ -36,57 +43,58 @@ function SettingChart({ series, setSeries, isBar, setIsBar }: CheckboxProps) {
   return (
     <Stack
       direction="row"
-      justifyContent="center"
       divider={<Divider orientation="vertical" flexItem />}
       spacing={2}
-      sx={{ m: '20px 0' }}
+      sx={{ m: '20px 0', justifyContent: 'center', flexWrap: 'wrap' }}
     >
       <FormControl>
-        <FormLabel id="label-radio-group">
-          Тип диаграммы:
-        </FormLabel>
-        <RadioGroup
-          name="group-radio"
-          value={isBar ? 'bar' : 'dot'}
-          onChange={handleRadioChange}
-        >
+        <FormLabel id="label-radio-group">Тип диаграммы:</FormLabel>
+        <RadioGroup name="group-radio" value={isBar ? 'bar' : 'dot'} onChange={handleRadioChange}>
           <FormControlLabel value="bar" control={<Radio />} label="Гистограмма" />
           <FormControlLabel value="dot" control={<Radio />} label="Линейная" />
         </RadioGroup>
       </FormControl>
       <FormControl>
-        <FormLabel id="label-checkbox-group">
-          На диаграмме показать:
-        </FormLabel>
+        <FormLabel id="label-checkbox-group">Значение по оси OY:</FormLabel>
         <FormControlLabel
           control={
             <Checkbox
-              checked={series['Максимальная высота']}
+              checked={series[OY_MAX_TITLES]}
               onChange={handleChange}
-              name="Максимальная высота"
+              name={OY_MAX_TITLES}
             />
           }
-          label="максимальную высоту"
+          label={OY_MAX_TITLES}
         />
         <FormControlLabel
           control={
             <Checkbox
-              checked={series['Средняя высота']}
+              checked={series[OY_MIN_TITLES]}
               onChange={handleChange}
-              name="Средняя высота"
+              name={OY_MIN_TITLES}
             />
           }
-          label="среднюю высоту"
+          label={OY_MIN_TITLES}
         />
         <FormControlLabel
           control={
             <Checkbox
-              checked={series['Минимальная высота']}
+              checked={series[OY_MAX_UCL]}
               onChange={handleChange}
-              name="Минимальная высота"
+              name={OY_MAX_UCL}
             />
           }
-          label="минимальную высоту"
+          label={OY_MAX_UCL}
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={series[OY_MIN_UCL]}
+              onChange={handleChange}
+              name={OY_MIN_UCL}
+            />
+          }
+          label={OY_MIN_UCL}
         />
       </FormControl>
     </Stack>

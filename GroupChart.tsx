@@ -2,8 +2,9 @@ import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
 import Container from '@mui/material/Container';
-import type { tGroup } from '../groupdata';
 import SettingChart, { type tSeries } from './SettingChart';
+import type { tGroup } from '../groupdata';
+import { OY_MAX_TITLES, OY_MIN_TITLES, OY_MAX_UCL, OY_MIN_UCL } from '../groupdata';
 
 type GroupChartProps = {
   data: tGroup;
@@ -11,18 +12,20 @@ type GroupChartProps = {
 
 function GroupChart({ data }: GroupChartProps) {
   const [series, setSeries] = React.useState<tSeries>({
-    'Максимальная высота': true,
-    'Средняя высота': false,
-    'Минимальная высота': false,
+    [OY_MAX_TITLES]: true,
+    [OY_MIN_TITLES]: false,
+    [OY_MAX_UCL]: false,
+    [OY_MIN_UCL]: false,
   });
 
   const [isBar, setIsBar] = React.useState(true);
 
   const seriesY = Object.entries(series)
     .filter((item) => item[1] === true)
-    .map((item) => ({ dataKey: item[0], label: 'Высота (м)' }));
+    .map((item) => ({ dataKey: item[0], label: item[0] }));
 
   const chartSetting = {
+    yAxis: [{ label: 'Значение по оси OY' }],
     height: 400,
   };
 
@@ -42,7 +45,7 @@ function GroupChart({ data }: GroupChartProps) {
           xAxis={[{ scaleType: 'band', dataKey: 'Группа' }]}
           series={seriesY}
           slotProps={legendSlotProps}
-          {...(oneSeries ? { barLabel: 'value'} : {})}
+          {...(oneSeries ? { barLabel: 'value' as const } : {})}
           {...chartSetting}
         />
       ) : (

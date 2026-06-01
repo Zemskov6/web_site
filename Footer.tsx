@@ -3,15 +3,15 @@ import Typography from '@mui/material/Typography';
 
 function Footer() {
   return (
-    <Box 
-      component="footer" 
-      sx={{ 
-        mt: 4, 
-        py: 3, 
-        px: 2, 
+    <Box
+      component="footer"
+      sx={{
+        mt: 4,
+        py: 3,
+        px: 2,
         bgcolor: '#3e3e3e',
         color: '#c2c2c2',
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     >
       <Typography variant="body2">

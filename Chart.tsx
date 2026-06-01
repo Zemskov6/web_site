@@ -6,43 +6,41 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { years, countries, types } from './groupdata';
 import GroupGrid from './components/GroupGrid';
 import GroupChart from './components/GroupChart';
+import { byClubName, byCountry, byYear, type GroupKey } from './groupdata';
 
-type tSelect = 'Страна' | 'Год' | 'Тип';
+const groupMap = {
+  'Название клуба': byClubName,
+  'Страна': byCountry,
+  'Год основания': byYear,
+} as const;
 
 function Chart() {
-  const [group, setGroup] = React.useState<tSelect>('Страна');
-  const [groupData, setGroupData] = React.useState(countries);
+  const [group, setGroup] = React.useState<GroupKey>('Страна');
+  const [groupData, setGroupData] = React.useState(byCountry);
 
   const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value as tSelect;
+    const value = event.target.value as GroupKey;
     setGroup(value);
-    if (value === 'Страна') {
-      setGroupData(countries);
-    } else if (value === 'Год') {
-      setGroupData(years);
-    } else {
-      setGroupData(types);
-    }
+    setGroupData(groupMap[value]);
   };
 
   return (
     <div>
       <Navbar active="3" />
-      <Box sx={{ width: '200px', m: 'auto' }}>
+      <Box sx={{ width: '280px', m: '20px auto' }}>
         <FormControl fullWidth>
-          <InputLabel> Группировать по </InputLabel>
+          <InputLabel>Значение по оси OX</InputLabel>
           <Select
             id="select-group"
             value={group}
-            label="Группировать по"
+            label="Значение по оси OX"
             onChange={handleChange}
           >
-            <MenuItem value="Страна"> Стране </MenuItem>
-            <MenuItem value="Год"> Году </MenuItem>
-            <MenuItem value="Тип"> Типу </MenuItem>
+            <MenuItem value="Название клуба">Название клуба</MenuItem>
+            <MenuItem value="Страна">Страна</MenuItem>
+            <MenuItem value="Год основания">Год основания</MenuItem>
           </Select>
         </FormControl>
       </Box>

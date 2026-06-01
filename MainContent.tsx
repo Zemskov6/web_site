@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { bannerImages } from '../data/footballClubs';
 
 function MainContent() {
@@ -20,6 +21,19 @@ function MainContent() {
   const block2Part2 = leftColumnImages.find(img => img.className === 'block2-part2');
   
   const rightImages = rightColumnImages;
+
+  const renderImage = (src?: string, alt?: string, link?: string) => {
+    const img = <img src={src} alt={alt || 'Фото с футболом'} />;
+    if (link) {
+      return (
+        <Box component={Link} to={link} sx={{ display: 'block', width: '100%', height: '100%' }}>
+          {img}
+        </Box>
+      );
+    }
+    return img;
+  };
+
 
   return (
     <Box
@@ -52,7 +66,7 @@ function MainContent() {
             },
           }}
         >
-          <img src={block1Image?.img} alt={block1Image?.alt || 'Фото с футболом'} />
+          {renderImage(block1Image?.img, block1Image?.alt, block1Image?.link)}
         </Box>
         
         {/* Контейнер для блоков 2.1 и 2.2 */}
@@ -76,7 +90,7 @@ function MainContent() {
               },
             }}
           >
-            <img src={block2Part1?.img} alt={block2Part1?.alt || 'Фото с футболом'} />
+            {renderImage(block2Part1?.img, block2Part1?.alt, block2Part1?.link)}
           </Box>
           <Box
             component="div"
@@ -91,7 +105,7 @@ function MainContent() {
               },
             }}
           >
-            <img src={block2Part2?.img} alt={block2Part2?.alt || 'Фото с футболом'} />
+            {renderImage(block2Part2?.img, block2Part2?.alt, block2Part2?.link)}
           </Box>
         </Box>
       </Box>
@@ -118,7 +132,7 @@ function MainContent() {
               },
             }}
           >
-            <img src={image.img} alt={image.alt} />
+            {renderImage(image.img, image.alt, image.link)}
           </Box>
         ))}
       </Box>
